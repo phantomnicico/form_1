@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>داشبورد ثبت‌نام</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+
+    background:#eef2f5;
+    color:#27323a;
+}
+
+
+/* ================================
+   Layout
+================================ */
+
+.app{
+    min-height:100vh;
+    padding:24px;
+}
+
+
+/* ================================
+   Header
+================================ */
+
+.header{
+    background:#eef2f5;
+
+    border-radius:24px;
+
+    padding:24px 28px;
+
+    margin-bottom:24px;
+
+    box-shadow:
+        10px 10px 24px rgba(163,177,198,.45),
+        -10px -10px 24px rgba(255,255,255,.9);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+}
+
+.brand h1{
+    margin:0 0 8px;
+
+    font-size:25px;
+}
+
+.brand p{
+    margin:0;
+
+    color:#74808a;
+
+    font-size:14px;
+}
+
+.status{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    font-size:13px;
+
+    color:#66727c;
+}
+
+.status-dot{
+    width:10px;
+    height:10px;
+
+    border-radius:50%;
+
+    background:#35b779;
+
+    box-shadow:
+        0 0 0 4px rgba(53,183,121,.12);
+}
+
+
+/* ================================
+   Cards
+================================ */
+
+.cards{
+    display:grid;
+
+    grid-template-columns:
+        repeat(6,1fr);
+
+    gap:18px;
+
+    margin-bottom:24px;
+}
+
+.card{
+    background:#eef2f5;
+
+    border-radius:22px;
+
+    padding:22px;
+
+    min-height:125px;
+
+    box-shadow:
+        8px 8px 18px rgba(163,177,198,.45),
+        -8px -8px 18px rgba(255,255,255,.9);
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+}
+
+.card.active{
+    box-shadow:
+        inset 5px 5px 12px rgba(163,177,198,.45),
+        inset -5px -5px 12px rgba(255,255,255,.9);
+}
+
+.card-title{
+    color:#74808a;
+
+    font-size:13px;
+
+    margin-bottom:15px;
+}
+
+.card-number{
+    font-size:30px;
+
+    font-weight:bold;
+
+    color:#25313a;
+}
+
+.card-sub{
+    margin-top:8px;
+
+    font-size:11px;
+
+    color:#89939a;
+}
+
+
+/* ================================
+   Total card
+================================ */
+
+.card.total{
+    background:
+        linear-gradient(
+            145deg,
+            #e8edf1,
+            #f5f7f8
+        );
+}
+
+
+/* ================================
+   Panel
+================================ */
+
+.panel{
+    background:#eef2f5;
+
+    border-radius:24px;
+
+    padding:22px;
+
+    box-shadow:
+        10px 10px 24px rgba(163,177,198,.45),
+        -10px -10px 24px rgba(255,255,255,.9);
+}
+
+
+/* ================================
+   Toolbar
+================================ */
+
+.toolbar{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 220px 130px;
+
+    gap:14px;
+
+    margin-bottom:20px;
+}
+
+.input,
+.select,
+.button{
+
+    border:none;
+
+    outline:none;
+
+    border-radius:15px;
+
+    background:#eef2f5;
+
+    padding:14px 16px;
+
+    font-family:inherit;
+
+    font-size:14px;
+
+    color:#27323a;
+
+    box-shadow:
+        inset 4px 4px 9px rgba(163,177,198,.38),
+        inset -4px -4px 9px rgba(255,255,255,.9);
+}
+
+.input:focus,
+.select:focus{
+
+    box-shadow:
+        inset 5px 5px 10px rgba(163,177,198,.45),
+        inset -5px -5px 10px rgba(255,255,255,.9);
+}
+
+.button{
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    box-shadow:
+        6px 6px 12px rgba(163,177,198,.4),
+        -6px -6px 12px rgba(255,255,255,.9);
+}
+
+.button:active{
+
+    box-shadow:
+        inset 4px 4px 9px rgba(163,177,198,.4),
+        inset -4px -4px 9px rgba(255,255,255,.9);
+}
+
+
+/* ================================
+   Result info
+================================ */
+
+.result-info{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:14px;
+
+    color:#68747d;
+
+    font-size:13px;
+}
+
+
+/* ================================
+   Table
+================================ */
+
+.table-wrap{
+
+    width:100%;
+
+    overflow:auto;
+
+    border-radius:18px;
+
+    box-shadow:
+        inset 4px 4px 10px rgba(163,177,198,.28),
+        inset -4px -4px 10px rgba(255,255,255,.85);
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:700px;
+}
+
+thead{
+
+    background:#e5eaee;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:2;
+}
+
+th{
+
+    padding:15px 12px;
+
+    text-align:right;
+
+    font-size:13px;
+
+    color:#52606a;
+
+    white-space:nowrap;
+}
+
+td{
+
+    padding:14px 12px;
+
+    border-top:1px solid #dde3e7;
+
+    font-size:13px;
+
+    white-space:nowrap;
+}
+
+tbody tr:hover{
+
+    background:#e8edf0;
+}
+
+
+/* ================================
+   Size badge
+================================ */
+
+.size{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-width:50px;
+
+    padding:6px 10px;
+
+    border-radius:10px;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    background:#eef2f5;
+
+    box-shadow:
+        3px 3px 7px rgba(163,177,198,.35),
+        -3px -3px 7px rgba(255,255,255,.9);
+}
+
+
+/* ================================
+   Loading
+================================ */
+
+.loading{
+
+    padding:60px;
+
+    text-align:center;
+
+    color:#77838c;
+}
+
+
+/* ================================
+   Empty
+================================ */
+
+.empty{
+
+    padding:60px;
+
+    text-align:center;
+
+    color:#89939a;
+}
+
+
+/* ================================
+   Responsive
+================================ */
+
+@media(max-width:1100px){
+
+    .cards{
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+
+}
+
+@media(max-width:700px){
+
+    .app{
+        padding:12px;
+    }
+
+    .header{
+        flex-direction:column;
+
+        align-items:flex-start;
+    }
+
+    .cards{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .toolbar{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:450px){
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div class="brand">
+
+            <h1>
+                داشبورد مدیریت ثبت‌نام
+            </h1>
+
+            <p>
+                نمایش ثبت‌نامی‌ها، جستجو و کنترل سایز لباس
+            </p>
+
+        </div>
+
+
+        <div class="status">
+
+            <span class="status-dot"></span>
+
+            <span id="statusText">
+                در حال اتصال...
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- SIZE CARDS -->
+
+    <div class="cards">
+
+
+        <div class="card total"
+             data-size="ALL"
+             onclick="filterSize('ALL')">
+
+            <div class="card-title">
+                کل ثبت‌نامی‌ها
+            </div>
+
+            <div class="card-number"
+                 id="totalCount">
+                0
+            </div>
+
+            <div class="card-sub">
+                نفر
+            </div>
+
+        </div>
+
+
+
+        <div class="card"
+             data-size="L"
+             onclick="filterSize('L')">
+
+            <div class="card-title">
+                سایز L
+            </div>
+
+            <div class="card-number"
+                 id="countL">
+                0
+            </div>
+
+            <div class="card-sub">
+                نفر
+            </div>
+
+        </div>
+
+
+
+        <div class="card"
+             data-size="M"
+             onclick="filterSize('M')">
+
+            <div class="card-title">
+                سایز M
+            </div>
+
+            <div class="card-number"
+                 id="countM">
+                0
+            </div>
+
+            <div class="card-sub">
+                نفر
+            </div>
+
+        </div>
+
+
+
+        <div class="card"
+             data-size="XL"
+             onclick="filterSize('XL')">
+
+            <div class="card-title">
+                سایز XL
+            </div>
+
+            <div class="card-number"
+                 id="countXL">
+                0
+            </div>
+
+            <div class="card-sub">
+                نفر
+            </div>
+
+        </div>
+
+
+
+        <div class="card"
+             data-size="XXL"
+             onclick="filterSize('XXL')">
+
+            <div class="card-title">
+                سایز XXL
+            </div>
+
+            <div class="card-number"
+                 id="countXXL">
+                0
+            </div>
+
+            <div class="card-sub">
+                نفر
+            </div>
+
+        </div>
+
+
+
+        <div class="card"
+             data-size="XXXL"
+             onclick="filterSize('XXXL')">
+
+            <div class="card-title">
+                سایز XXXL
+            </div>
+
+            <div class="card-number"
+                 id="countXXXL">
+                0
+            </div>
+
+            <div class="card-sub">
+                نفر
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- MAIN PANEL -->
+
+    <div class="panel">
+
+
+        <!-- SEARCH -->
+
+        <div class="toolbar">
+
+
+            <input
+                id="searchInput"
+                class="input"
+                type="text"
+                placeholder="جستجوی نام فرد..."
+                oninput="renderTable()"
+            >
+
+
+            <select
+                id="sizeFilter"
+                class="select"
+                onchange="renderTable()">
+
+                <option value="ALL">
+                    همه سایزها
+                </option>
+
+                <option value="L">
+                    L
+                </option>
+
+                <option value="M">
+                    M
+                </option>
+
+                <option value="XL">
+                    XL
+                </option>
+
+                <option value="XXL">
+                    XXL
+                </option>
+
+                <option value="XXXL">
+                    XXXL
+                </option>
+
+            </select>
+
+
+            <button
+                class="button"
+                onclick="loadData()">
+
+                بروزرسانی
+
+            </button>
+
+        </div>
+
+
+
+        <!-- RESULT -->
+
+        <div class="result-info">
+
+            <span id="resultCount">
+                0 رکورد
+            </span>
+
+            <span id="lastUpdate">
+                -
+            </span>
+
+        </div>
+
+
+
+        <!-- TABLE -->
+
+        <div class="table-wrap">
+
+            <div id="tableContainer">
+
+                <div class="loading">
+                    در حال دریافت اطلاعات...
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+/******************************************************
+ * لینک Web App
+ ******************************************************/
+
+const WEB_APP_URL =
+    'https://script.google.com/macros/s/AKfycbxyUPP8LPbqV75ltMGl0lzheMKCt_bs-vD2xJ-9P5i9OvcZNTg8jPbay6Qeb-BaK1GFmA/exec';
+
+
+
+/******************************************************
+ * داده‌ها
+ ******************************************************/
+
+let dashboardData = {
+
+    headers: [],
+
+    rows: [],
+
+    counts: {},
+
+    total: 0
+
+};
+
+
+
+/******************************************************
+ * تشخیص ستون نام
+ ******************************************************/
+
+function findNameColumn(headers){
+
+    const possible = [
+
+        'نام و نام خانوادگی',
+
+        'نام',
+
+        'نام فرد',
+
+        'نام کامل',
+
+        'fullname',
+
+        'full name',
+
+        'name'
+
+    ];
+
+
+    for(
+        let i = 0;
+        i < headers.length;
+        i++
+    ){
+
+        const h =
+            String(headers[i] || '')
+            .trim()
+            .toLowerCase();
+
+
+        if(
+            possible.some(
+                p =>
+                h === p.toLowerCase()
+            )
+        ){
+
+            return i;
+
+        }
+
+    }
+
+
+    // اگر نام پیدا نشد،
+    // جستجو در کل رکورد انجام می‌شود
+
+    return -1;
+}
+
+
+
+/******************************************************
+ * ستون سایز
+ ******************************************************/
+
+function findSizeColumn(headers){
+
+    for(
+        let i = 0;
+        i < headers.length;
+        i++
+    ){
+
+        const h =
+            String(headers[i] || '')
+            .trim()
+            .toLowerCase();
+
+
+        if(
+            h.includes('سایز') ||
+            h.includes('size') ||
+            h === 'لباس'
+        ){
+
+            return i;
+
+        }
+
+    }
+
+
+    // ستون I
+    return 8;
+}
+
+
+
+/******************************************************
+ * JSONP
+ *
+ * مناسب برای HTML خارجی
+ ******************************************************/
+
+function loadData(){
+
+    if(
+        !WEB_APP_URL ||
+        WEB_APP_URL.includes('اینجا لینک')
+    ){
+
+        alert(
+            'ابتدا لینک Web App را در WEB_APP_URL قرار دهید.'
+        );
+
+        return;
+    }
+
+
+    document.getElementById(
+        'statusText'
+    ).textContent =
+        'در حال دریافت اطلاعات...';
+
+
+    const oldScript =
+        document.getElementById(
+            'gasApiScript'
+        );
+
+
+    if(oldScript){
+        oldScript.remove();
+    }
+
+
+    const callbackName =
+        'gasCallback_' +
+        Date.now();
+
+
+    window[callbackName] =
+        function(data){
+
+            try{
+
+                dashboardData =
+                    data;
+
+
+                updateCards();
+
+                renderTable();
+
+
+                document.getElementById(
+                    'statusText'
+                ).textContent =
+                    'اتصال برقرار است';
+
+
+                document.getElementById(
+                    'lastUpdate'
+                ).textContent =
+                    data.updatedAt
+                    ? 'آخرین بروزرسانی: ' +
+                      data.updatedAt
+                    : '';
+
+
+            }
+            catch(error){
+
+                console.error(error);
+
+                showError(
+                    'خطا در پردازش اطلاعات'
+                );
+
+            }
+
+
+            delete window[callbackName];
+
+            const script =
+                document.getElementById(
+                    'gasApiScript'
+                );
+
+            if(script){
+                script.remove();
+            }
+
+        };
+
+
+    const script =
+        document.createElement('script');
+
+
+    script.id =
+        'gasApiScript';
+
+
+    script.src =
+        WEB_APP_URL +
+        '?action=dashboard&callback=' +
+        callbackName;
+
+
+    script.onerror =
+        function(){
+
+            document.getElementById(
+                'statusText'
+            ).textContent =
+                'خطا در اتصال';
+
+
+            showError(
+                'اتصال به Google Apps Script برقرار نشد.'
+            );
+
+        };
+
+
+    document.body.appendChild(script);
+
+}
+
+
+
+/******************************************************
+ * کارت‌ها
+ ******************************************************/
+
+function updateCards(){
+
+    const c =
+        dashboardData.counts || {};
+
+
+    document.getElementById(
+        'totalCount'
+    ).textContent =
+        dashboardData.total || 0;
+
+
+    document.getElementById(
+        'countL'
+    ).textContent =
+        c.L || 0;
+
+
+    document.getElementById(
+        'countM'
+    ).textContent =
+        c.M || 0;
+
+
+    document.getElementById(
+        'countXL'
+    ).textContent =
+        c.XL || 0;
+
+
+    document.getElementById(
+        'countXXL'
+    ).textContent =
+        c.XXL || 0;
+
+
+    document.getElementById(
+        'countXXXL'
+    ).textContent =
+        c.XXXL || 0;
+
+}
+
+
+
+/******************************************************
+ * فیلتر سایز
+ ******************************************************/
+
+function filterSize(size){
+
+    document.getElementById(
+        'sizeFilter'
+    ).value =
+        size;
+
+
+    document
+        .querySelectorAll('.card')
+        .forEach(card => {
+
+            card.classList.remove(
+                'active'
+            );
+
+        });
+
+
+    const selected =
+        document.querySelector(
+            `.card[data-size="${size}"]`
+        );
+
+
+    if(selected){
+        selected.classList.add(
+            'active'
+        );
+    }
+
+
+    renderTable();
+}
+
+
+
+/******************************************************
+ * جستجو + فیلتر + جدول
+ ******************************************************/
+
+function renderTable(){
+
+    const headers =
+        dashboardData.headers || [];
+
+
+    const rows =
+        dashboardData.rows || [];
+
+
+    const search =
+        document
+        .getElementById(
+            'searchInput'
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const selectedSize =
+        document
+        .getElementById(
+            'sizeFilter'
+        )
+        .value;
+
+
+    const nameColumn =
+        findNameColumn(headers);
+
+
+    const sizeColumn =
+        findSizeColumn(headers);
+
+
+    const filtered =
+        rows.filter(row => {
+
+
+            /****************************************
+             * جستجوی نام
+             ****************************************/
+
+            let matchSearch = true;
+
+
+            if(search){
+
+                if(nameColumn >= 0){
+
+                    matchSearch =
+                        String(
+                            row[nameColumn] || ''
+                        )
+                        .toLowerCase()
+                        .includes(search);
+
+                }
+                else{
+
+                    matchSearch =
+                        row.some(
+                            value =>
+                            String(
+                                value || ''
+                            )
+                            .toLowerCase()
+                            .includes(search)
+                        );
+
+                }
+
+            }
+
+
+            /****************************************
+             * فیلتر سایز
+             ****************************************/
+
+            let matchSize = true;
+
+
+            if(
+                selectedSize !== 'ALL'
+            ){
+
+                const size =
+                    normalizeSize(
+                        row[sizeColumn]
+                    );
+
+
+                matchSize =
+                    size === selectedSize;
+
+            }
+
+
+            return (
+                matchSearch &&
+                matchSize
+            );
+
+        });
+
+
+    document.getElementById(
+        'resultCount'
+    ).textContent =
+        filtered.length +
+        ' رکورد';
+
+
+
+    /****************************************
+     * هیچ داده‌ای نیست
+     ****************************************/
+
+    if(filtered.length === 0){
+
+        document.getElementById(
+            'tableContainer'
+        ).innerHTML = `
+
+            <div class="empty">
+
+                رکوردی برای نمایش پیدا نشد.
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+
+    /****************************************
+     * ساخت جدول
+     ****************************************/
+
+    let html = '<table>';
+
+
+    html += '<thead><tr>';
+
+
+    html +=
+        '<th>ردیف</th>';
+
+
+    headers.forEach(
+        header => {
+
+            html +=
+                '<th>' +
+                escapeHtml(header) +
+                '</th>';
+
+        }
+    );
+
+
+    html +=
+        '</tr></thead>';
+
+
+    html +=
+        '<tbody>';
+
+
+    filtered.forEach(
+        (row, index) => {
+
+            html += '<tr>';
+
+
+            html +=
+                '<td>' +
+                (index + 1) +
+                '</td>';
+
+
+            row.forEach(
+                (value, colIndex) => {
+
+                    let cell =
+                        escapeHtml(
+                            value
+                        );
+
+
+                    if(
+                        colIndex ===
+                        sizeColumn
+                    ){
+
+                        cell =
+                            `<span class="size">
+                                ${cell}
+                            </span>`;
+
+                    }
+
+
+                    html +=
+                        '<td>' +
+                        cell +
+                        '</td>';
+
+                }
+            );
+
+
+            html += '</tr>';
+
+        }
+    );
+
+
+    html +=
+        '</tbody></table>';
+
+
+    document.getElementById(
+        'tableContainer'
+    ).innerHTML =
+        html;
+
+}
+
+
+
+/******************************************************
+ * Normalize Size
+ ******************************************************/
+
+function normalizeSize(value){
+
+    return String(value || '')
+        .trim()
+        .toUpperCase()
+        .replace(/\s+/g,'');
+
+}
+
+
+
+/******************************************************
+ * HTML Escape
+ ******************************************************/
+
+function escapeHtml(value){
+
+    return String(
+        value ?? ''
+    )
+    .replace(
+        /&/g,
+        '&amp;'
+    )
+    .replace(
+        /</g,
+        '&lt;'
+    )
+    .replace(
+        />/g,
+        '&gt;'
+    )
+    .replace(
+        /"/g,
+        '&quot;'
+    )
+    .replace(
+        /'/g,
+        '&#039;'
+    );
+
+}
+
+
+
+/******************************************************
+ * Error
+ ******************************************************/
+
+function showError(message){
+
+    document.getElementById(
+        'tableContainer'
+    ).innerHTML = `
+
+        <div class="empty">
+
+            ${escapeHtml(message)}
+
+        </div>
+
+    `;
+
+}
+
+
+
+/******************************************************
+ * شروع
+ ******************************************************/
+
+window.addEventListener(
+    'load',
+    function(){
+
+        loadData();
+
+        // بروزرسانی خودکار هر 60 ثانیه
+        setInterval(
+            loadData,
+            60000
+        );
+
+    }
+);
+
+</script>
+
+
+</body>
+</html>
